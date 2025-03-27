@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Site de Trilha de Carreira - Visualize sua jornada de crescimento na empresa" />
+  <meta name="keywords" content="trilha de carreira, RH, desenvolvimento, carreira" />
+  <meta name="author" content="Empresa Exemplo" />
+  <title>Trilha de Carreira</title>
+  <!-- AOS CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f2f2f2;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background-color: #004080;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+    /* Link para Área do Colaborador (Login) */
+    nav ul li a#loginLink {
+      background-color: #0073e6;
+      padding: 0.3rem 0.7rem;
+      border-radius: 5px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #004080, #0073e6);
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .hero h2 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .button {
+      display: inline-block;
+      margin-top: 1rem;
+      background-color: #004080;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .button:hover {
+      background-color: #0066cc;
+    }
+    main {
+      padding: 2rem 0;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 3rem 2rem;
+      gap: 2rem;
+    }
+    .card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    .card-header {
+      background-color: #0073e6;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .card-body {
+      padding: 1rem;
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(-10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    .card-body p {
+      margin: 0.5rem 0;
+      font-size: 0.95rem;
+    }
+    /* Seção Sobre */
+    section.about {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: #fff;
+      margin: 2rem 0;
+    }
+    section.about h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    section.about p {
+      max-width: 800px;
+      margin: 0 auto 1rem;
+    }
+    /* Seção Depoimentos */
+    section.testimonials {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: #fff;
+      margin: 2rem 0;
+    }
+    section.testimonials h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .testimonial {
+      max-width: 600px;
+      margin: 1rem auto;
+      font-style: italic;
+      border-left: 4px solid #0073e6;
+      padding-left: 1rem;
+    }
+    .testimonial h4 {
+      margin-top: 0.5rem;
+      font-weight: normal;
+    }
+    /* Seção FAQ */
+    section.faq {
+      padding: 4rem 2rem;
+      background: #fff;
+      margin: 2rem 0;
+    }
+    section.faq h2 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .faq-item {
+      max-width: 800px;
+      margin: 0 auto 1rem;
+      border-bottom: 1px solid #ccc;
+      padding: 0.5rem 0;
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+    }
+    .faq-answer {
+      display: none;
+      font-size: 0.95rem;
+      margin-top: 0.5rem;
+    }
+    /* Seção Contato */
+    section.contact {
+      padding: 4rem 2rem;
+      background: #fff;
+      margin: 2rem 0;
+    }
+    section.contact h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+    .contact form {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .contact .form-group {
+      margin-bottom: 1rem;
+    }
+    .contact label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+    .contact input, .contact textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .contact textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    /* Rodapé */
+    footer {
+      background-color: #003366;
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    .footer-info p {
+      margin: 0.2rem 0;
+      font-size: 0.9rem;
+    }
+    .footer-info a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .footer-info a:hover {
+      text-decoration: underline;
+    }
+    .footer-social a {
+      color: white;
+      margin: 0 0.5rem;
+      font-size: 1.2rem;
+      transition: color 0.3s;
+    }
+    .footer-social a:hover {
+      color: #0073e6;
+    }
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1001;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 10px;
+      position: relative;
+    }
+    .close {
+      color: #aaa;
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header id="top">
+    <h1>Trilha de Carreira</h1>
+    <nav>
+      <ul>
+        <li><a href="#top">Início</a></li>
+        <li><a href="#cargos">Cargos</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#depoimentos">Depoimentos</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contato">Contato</a></li>
+        <li><a href="#" id="loginLink">Área do Colaborador</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <!-- Seção Hero -->
+    <section class="hero" data-aos="fade-up">
+      <h2>Visualize sua jornada de crescimento na empresa</h2>
+      <p>Conheça os cargos, requisitos e oportunidades disponíveis para seu desenvolvimento profissional.</p>
+      <a href="#cargos" class="button">Ver Cargos</a>
+      <a href="#" class="button" id="newsletterBtn">Inscreva-se na Newsletter</a>
+    </section>
+
+    <!-- Seção Cargos -->
+    <div class="container" id="cargos" data-aos="fade-up">
+      <div class="card" onclick="toggleCard(this)">
+        <div class="card-header"><i class="fas fa-user-graduate"></i> Analista de RH Júnior</div>
+        <div class="card-body">
+          <p><strong>Formação:</strong> Ensino Superior em andamento</p>
+          <p><strong>Idioma:</strong> Inglês básico</p>
+          <p><strong>Experiência:</strong> Até 2 anos na área</p>
+          <p><strong>Trilha:</strong> Natural para Analista Pleno</p>
+        </div>
+      </div>
+      <div class="card" onclick="toggleCard(this)">
+        <div class="card-header"><i class="fas fa-user-tie"></i> Analista de RH Pleno</div>
+        <div class="card-body">
+          <p><strong>Formação:</strong> Ensino Superior completo</p>
+          <p><strong>Idioma:</strong> Inglês intermediário</p>
+          <p><strong>Experiência:</strong> 3-5 anos</p>
+          <p><strong>Trilha:</strong> Natural para Coordenador</p>
+        </div>
+      </div>
+      <div class="card" onclick="toggleCard(this)">
+        <div class="card-header"><i class="fas fa-user-cog"></i> Coordenador de RH</div>
+        <div class="card-body">
+          <p><strong>Formação:</strong> Pós-graduação</p>
+          <p><strong>Idioma:</strong> Inglês avançado</p>
+          <p><strong>Experiência:</strong> 6+ anos liderando equipe</p>
+          <p><strong>Trilha:</strong> Possível para Gerente</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seção Sobre -->
+    <section class="about" id="sobre" data-aos="fade-up">
+      <h2>Sobre a Empresa</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis interdum commodo quam, sed pretium lacus ullamcorper non. Nulla facilisi.</p>
+      <p>Curabitur vehicula, elit ac dignissim, erat leo tristique eros, ut tempus libero dui ut ligula. Quisque a dui a erat malesuada ullamcorper.</p>
+    </section>
+
+    <!-- Seção Depoimentos -->
+    <section class="testimonials" id="depoimentos" data-aos="fade-up">
+      <h2>Depoimentos</h2>
+      <div class="testimonial">
+        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Vivamus efficitur."</p>
+        <h4>João Silva</h4>
+      </div>
+      <div class="testimonial">
+        <p>"Praesent tincidunt quam a ligula placerat, in sodales metus venenatis. Cras vitae erat quis velit tincidunt."</p>
+        <h4>Maria Souza</h4>
+      </div>
+    </section>
+
+    <!-- Seção FAQ -->
+    <section class="faq" id="faq" data-aos="fade-up">
+      <h2>FAQ - Perguntas Frequentes</h2>
+      <div class="faq-item">
+        <button class="faq-question">O que é a Trilha de Carreira? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget consectetur fermentum, nunc massa consequat arcu.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Como me inscrevo? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget consectetur fermentum, nunc massa consequat arcu.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção Contato -->
+    <section class="contact" id="contato" data-aos="fade-up">
+      <h2>Contato</h2>
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" placeholder="Digite seu nome" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Digite seu email" required>
+        </div>
+        <div class="form-group">
+          <label for="mensagem">Mensagem</label>
+          <textarea id="mensagem" placeholder="Escreva sua mensagem" required></textarea>
+        </div>
+        <button type="submit" class="button">Enviar</button>
+      </form>
+      <div id="formFeedback" style="display:none; color: green; margin-top: 1rem;">Sua mensagem foi enviada!</div>
+    </section>
+  </main>
+
+  <!-- Rodapé -->
+  <footer id="rodape">
+    <div class="footer-container">
+      <div class="footer-info">
+        <p>&copy; 2025 Empresa Exemplo - Todos os direitos reservados.</p>
+        <p><a href="#top">Voltar ao topo</a></p>
+      </div>
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Newsletter -->
+  <div id="newsletterModal" class="modal">
+    <div class="modal-content" data-aos="zoom-in">
+      <span class="close" id="newsletterClose">&times;</span>
+      <h2>Inscreva-se na Newsletter</h2>
+      <form id="newsletterForm">
+        <div class="form-group">
+          <label for="newsletterEmail">Email</label>
+          <input type="email" id="newsletterEmail" placeholder="Digite seu email" required>
+        </div>
+        <button type="submit" class="button">Inscrever</button>
+      </form>
+      <div id="newsletterFeedback" style="display:none; color: green; margin-top: 1rem;">Inscrição realizada com sucesso!</div>
+    </div>
+  </div>
+
+  <!-- Modal Área do Colaborador (Login) -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content" data-aos="zoom-in">
+      <span class="close" id="loginClose">&times;</span>
+      <h2>Área do Colaborador</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" placeholder="Digite seu email" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Senha</label>
+          <input type="password" id="loginPassword" placeholder="Digite sua senha" required>
+        </div>
+        <button type="submit" class="button">Entrar</button>
+      </form>
+      <div id="loginFeedback" style="display:none; color: green; margin-top: 1rem;">Login efetuado com sucesso!</div>
+    </div>
+  </div>
+
+  <!-- AOS JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init();
+
+    // Função para alternar os cards de cargos
+    function toggleCard(card) {
+      const body = card.querySelector('.card-body');
+      const allCards = document.querySelectorAll('.card-body');
+      allCards.forEach(el => {
+        if (el !== body) el.style.display = 'none';
+      });
+      body.style.display = body.style.display === 'block' ? 'none' : 'block';
+    }
+
+    // FAQ Accordion
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(q => {
+      q.addEventListener('click', function() {
+        const answer = this.nextElementSibling;
+        answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+      });
+    });
+
+    // Formulário de Contato - Feedback
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('formFeedback').style.display = 'block';
+      this.reset();
+    });
+
+    // Modal Newsletter
+    const newsletterModal = document.getElementById('newsletterModal');
+    const newsletterBtn = document.getElementById('newsletterBtn');
+    const newsletterClose = document.getElementById('newsletterClose');
+
+    newsletterBtn.onclick = function(e) {
+      e.preventDefault();
+      newsletterModal.style.display = 'flex';
+    };
+
+    newsletterClose.onclick = function() {
+      newsletterModal.style.display = 'none';
+    };
+
+    document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('newsletterFeedback').style.display = 'block';
+      this.reset();
+    });
+
+    // Modal Área do Colaborador (Login)
+    const loginModal = document.getElementById('loginModal');
+    const loginLink = document.getElementById('loginLink');
+    const loginClose = document.getElementById('loginClose');
+
+    loginLink.onclick = function(e) {
+      e.preventDefault();
+      loginModal.style.display = 'flex';
+    };
+
+    loginClose.onclick = function() {
+      loginModal.style.display = 'none';
+    };
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('loginFeedback').style.display = 'block';
+      this.reset();
+    });
+
+    // Fechar modais ao clicar fora do conteúdo
+    window.onclick = function(event) {
+      if (event.target == newsletterModal) {
+        newsletterModal.style.display = 'none';
+      }
+      if (event.target == loginModal) {
+        loginModal.style.display = 'none';
+      }
+    };
+  </script>
+</body>
+</html>
