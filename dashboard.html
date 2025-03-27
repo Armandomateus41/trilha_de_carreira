@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Completo</title>
+  <!-- Font Awesome (ícones) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- CSS Principal -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- ============================= -->
+  <!-- 1 e 2: Header do Dashboard   -->
+  <!-- 3: Layout do Dropdown Header -->
+  <!-- ============================= -->
+  <header class="dashboard-header">
+    <div class="header-left">
+      <h1>Minha Empresa</h1>
+    </div>
+    <div class="header-right">
+      <!-- 3 e 4: Dropdown no Header -->
+      <div class="header-dropdown">
+        <button class="header-dropdown-btn" id="userMenuBtn">
+          <i class="fas fa-user"></i> Meu Perfil <i class="fas fa-caret-down"></i>
+        </button>
+        <div class="header-dropdown-content" id="userMenuDropdown">
+          <a href="#">Editar Perfil</a>
+          <a href="#">Configurações</a>
+          <a href="#">Sair</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="dashboard-container">
+    <!-- ========================================= -->
+    <!-- 5 e 12: Sidebar (menu lateral) + dropdown -->
+    <!-- ========================================= -->
+    <aside class="sidebar">
+      <div class="sidebar-profile">
+        <img src="https://via.placeholder.com/80" alt="Foto do Usuário">
+        <h2>Olá, Usuário</h2>
+      </div>
+      <nav>
+        <ul>
+          <!-- Item simples -->
+          <li><a href="#resumo" class="active"><i class="fas fa-home"></i> Resumo</a></li>
+
+          <!-- 12: Sidebar Dropdown -->
+          <li class="sidebar-dropdown">
+            <a href="#"><i class="fas fa-list"></i> Cadastros <i class="fas fa-chevron-down drop-arrow"></i></a>
+            <ul class="sidebar-submenu">
+              <li><a href="#listar-registros">Listar Registros</a></li>
+              <li><a href="#formulario">Novo Registro</a></li>
+            </ul>
+          </li>
+
+          <li><a href="#indicadores"><i class="fas fa-chart-line"></i> Indicadores</a></li>
+          <li><a href="#paginas"><i class="fas fa-file-alt"></i> Paginação Exemplo</a></li>
+          <li><a href="#formulario"><i class="fas fa-edit"></i> Formulário</a></li>
+          <li><a href="index.html"><i class="fas fa-arrow-left"></i> Voltar ao Site</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- ========================= -->
+    <!-- 6: Layout do Dashboard   -->
+    <!-- ========================= -->
+    <main class="dashboard-main">
+      <!-- Seção: Resumo -->
+      <section id="resumo" class="dashboard-section">
+        <h2>Resumo</h2>
+        <p>Bem-vindo ao seu painel. Aqui você encontra um overview rápido.</p>
+      </section>
+
+      <!-- Seção: Indicadores -->
+      <section id="indicadores" class="dashboard-section">
+        <h2>Indicadores</h2>
+        <div class="kpi-container">
+          <div class="kpi-item">
+            <h2>75%</h2>
+            <p>Progresso da Carreira</p>
+          </div>
+          <div class="kpi-item">
+            <h2>3</h2>
+            <p>Ano(s) na Empresa</p>
+          </div>
+          <div class="kpi-item">
+            <h2>Nível 2</h2>
+            <p>Posição Atual</p>
+          </div>
+          <div class="kpi-item">
+            <h2>+5</h2>
+            <p>Badges Conquistados</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- =============================== -->
+      <!-- 7: Layout de Listar Registros -->
+      <!-- =============================== -->
+      <section id="listar-registros" class="dashboard-section">
+        <h2>Listar Registros</h2>
+        <table class="registros-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>João da Silva</td>
+              <td>Ativo</td>
+              <td>
+                <!-- 9: Ícones nos botões -->
+                <button class="btn-action"><i class="fas fa-eye"></i></button>
+                <button class="btn-action"><i class="fas fa-edit"></i></button>
+                <button class="btn-action"><i class="fas fa-trash"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Maria Souza</td>
+              <td>Inativo</td>
+              <td>
+                <button class="btn-action"><i class="fas fa-eye"></i></button>
+                <button class="btn-action"><i class="fas fa-edit"></i></button>
+                <button class="btn-action"><i class="fas fa-trash"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ====================== -->
+      <!-- 8: Layout da Paginação -->
+      <!-- ====================== -->
+      <section id="paginas" class="dashboard-section">
+        <h2>Paginação</h2>
+        <div class="pagination">
+          <button class="pagination-btn"><i class="fas fa-chevron-left"></i> Anterior</button>
+          <span>Página 1 de 5</span>
+          <button class="pagination-btn">Próximo <i class="fas fa-chevron-right"></i></button>
+        </div>
+      </section>
+
+      <!-- ======================== -->
+      <!-- 10: Botão Dropdown Extra -->
+      <!-- ======================== -->
+      <section class="dashboard-section">
+        <h2>Botão Dropdown</h2>
+        <div class="dropdown-container">
+          <button class="dropdown-btn" id="extraDropdownBtn">
+            Ações <i class="fas fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content" id="extraDropdownContent">
+            <a href="#">Exportar CSV</a>
+            <a href="#">Exportar PDF</a>
+            <a href="#">Enviar Email</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================== -->
+      <!-- 11: Layout do Formulário -->
+      <!-- ====================== -->
+      <section id="formulario" class="dashboard-section">
+        <h2>Novo Registro</h2>
+        <form class="form-registro">
+          <div class="form-group">
+            <label for="nomeRegistro">Nome:</label>
+            <input type="text" id="nomeRegistro" placeholder="Nome do registro" required />
+          </div>
+          <div class="form-group">
+            <label for="statusRegistro">Status:</label>
+            <select id="statusRegistro" required>
+              <option value="Ativo">Ativo</option>
+              <option value="Inativo">Inativo</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="descricaoRegistro">Descrição:</label>
+            <textarea id="descricaoRegistro" rows="4"></textarea>
+          </div>
+          <button type="submit" class="button"><i class="fas fa-save"></i> Salvar</button>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <!-- ============================== -->
+  <!-- Rodapé do Dashboard (opcional) -->
+  <!-- ============================== -->
+  <footer class="dashboard-footer">
+    <p>&copy; 2025 Empresa Exemplo - Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- JS Principal -->
+  <script src="js/main.js"></script>
+</body>
+</html>
